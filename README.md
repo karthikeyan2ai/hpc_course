@@ -28,6 +28,11 @@ Time taken with 4 threads: 96 microseconds
 ###  code needs to evaluated again
 # ass1 learning
 
+### shared 
+all threads can access and modify the variable.
+### critical
+specify a section of code that must be executed by only one thread at a time.
+
 # assigmnet 3: integral of function
 
 used reduction, shared and private; there is reduction in time and parallelisation achieved
