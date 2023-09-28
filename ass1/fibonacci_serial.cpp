@@ -1,34 +1,31 @@
 #include <iostream>
-#include <chrono>
-using namespace std;
+using>
+
+#include namespace stdchrono <;
 using namespace std::chrono;
 
 int main() {
-    int n, t1 = 0, t2 = 1, nextTerm = 0;
+    int n = 10; // number of terms in the series
+    int fib[n];
 
-    cout << "Enter a positive integer: ";
-    cin >> n;
+    // initialize the first two terms
+    fib[0] = 0;
+    fib[1] = 1;
 
-    // check if the input is valid
-    if (n <= 0)        {
- cout << "Invalid input!";
-        return 0;
+    // calculate the series in serial
+    auto start_time = high_resolution_clock::now(); // start the timer
+    for (int i = 2; i < n; i++) {
+        fib[i] = fib[i-1] + fib[i-2];
     }
+    auto end_time = high_resolution_clock::now(); // end the timer
+    auto duration = duration_cast<microseconds>(end_time - start_time); // calculate the duration
+    cout << "Time taken in serial: " << duration.count() << " microseconds" << endl;
 
-    // generate the Fibonacci series and measure the time taken
-    auto start = high_resolution_clock::now();
-    cout << t1 << " " << t2 << " ";
-    for (int i = 3; i <= n; ++i) {
-        nextTerm = t1 + t2;
-        t1 = t2;
-        t2 = nextTerm;
-        cout << nextTerm << " ";
+    // print the series
+    for (int i = 0; i < n; i++) {
+        cout << fib[i] << " ";
     }
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(stop - start);
-
-    // print the time taken
-    cout << "\nTime taken: " << duration.count() << " microseconds" << endl;
+    cout << endl;
 
     return 0;
 }
