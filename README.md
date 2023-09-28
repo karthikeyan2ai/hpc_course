@@ -1,6 +1,6 @@
 # hpc_course
 some of hpc parallel programming code
-# assignment 1: Fibonacci series with openmp
+# ASSIGNMENT 1: Fibonacci series with openmp
 Used shared variable and critical and calculated time taken for different number of threads unfortunately time taken increases with thread
 # serial code result
 
@@ -33,7 +33,7 @@ all threads can access and modify the variable.
 ### critical
 specify a section of code that must be executed by only one thread at a time.
 
-# assigmnet 3: integral of function
+# ASSIGNMENT 3: integral of function
 
 used reduction, shared and private; there is reduction in time and parallelisation achieved
 
@@ -62,8 +62,28 @@ The reduction operation combines the values of the variable across all threads, 
 
  This is useful when each thread needs its own copy of a variable to avoid race conditions or to ensure thread safety. In the code above, we use private(x, y, xm, ym) to specify that the x, y, xm, and ym variables should have a separate copy for each thread. This ensures that each thread has its own copy of these variables, and they are not shared among threads.
 
-# ASSIGNMENT 2:
-
+# ASSIGNMENT 2: LU SOLVE 
 LU factorisation and solve implement
 didnt tested it with more numbers. not confident about results 
+## Serial code partial result and time taken
+
+1.38999
+-1.5358
+-2.03273
+-0.858735
+
+Time taken: 1101802 microseconds
+
+## parallel code result and time taken
+
+1.40006
+1.38999
+-1.5358
+-2.03273
+-0.858735
+
+Time taken: 319361 microseconds
+
+### unfortunately parallel code takes more time may be fixing private, shared  and critical parts helps improve speed and parallelise
+
 ### yet to understand and implement better
