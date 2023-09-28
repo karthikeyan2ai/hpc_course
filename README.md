@@ -61,3 +61,9 @@ The reduction operation combines the values of the variable across all threads, 
 ## private
 
  This is useful when each thread needs its own copy of a variable to avoid race conditions or to ensure thread safety. In the code above, we use private(x, y, xm, ym) to specify that the x, y, xm, and ym variables should have a separate copy for each thread. This ensures that each thread has its own copy of these variables, and they are not shared among threads.
+
+# ASSIGNMENT 2:
+
+LU factorisation and solve implement
+didnt tested it with more numbers. not confident about results 
+### yet to understand and implement better
