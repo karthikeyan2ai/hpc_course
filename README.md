@@ -42,3 +42,11 @@ Integral value: 0.239812
 
 Time taken: 8873 microseconds
 
+# ass3 learning
+understood reduction and private
+## Reduction
+The reduction operation combines the values of the variable across all threads, and the final result is stored in the original variable. For example, in the code above, we use reduction(+:integral) to specify that the integral variable should be summed across all threads. This ensures that each thread has its own copy of the integral variable, and the final result is the sum of all the thread-local copies.
+
+## private
+
+ This is useful when each thread needs its own copy of a variable to avoid race conditions or to ensure thread safety. In the code above, we use private(x, y, xm, ym) to specify that the x, y, xm, and ym variables should have a separate copy for each thread. This ensures that each thread has its own copy of these variables, and they are not shared among threads.
