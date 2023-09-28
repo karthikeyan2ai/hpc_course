@@ -1,7 +1,7 @@
 #include <iostream>
-using>
+#include <chrono>
 
-#include namespace stdchrono <;
+using namespace std;
 using namespace std::chrono;
 
 int main() {
