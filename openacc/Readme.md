@@ -1,3 +1,5 @@
+Read given text file with 1 million random number in range 0 to 99. Do stencil average with radius of 9 using cpp cuda programming
+
 ### How to run this file
 
 Either run it with gcc
