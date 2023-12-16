@@ -61,6 +61,8 @@ int main(int argc, char** argv) {
     std::vector<double> local_b(local_n);
     std::vector<double> local_x(local_n);
 
+    double start_time = MPI_Wtime();
+
     MPI_Scatter(A.data(), local_n * n, MPI_DOUBLE, local_A.data(), local_n * n, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Scatter(b.data(), local_n, MPI_DOUBLE, local_b.data(), local_n, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
@@ -82,7 +84,9 @@ int main(int argc, char** argv) {
             std::cout << "x[" << i << "] = " << x[i] << std::endl;
         }
     }
-
+    double end_time = MPI_Wtime(); 
+    double elapsed_time = end_time - start_time; // Calculate elapsed time
+    std::cout << "Process " << rank << ": Elapsed time = " << elapsed_time << " seconds" << std::endl;
     MPI_Finalize();
     return 0;
 }
