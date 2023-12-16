@@ -34,6 +34,8 @@ int main(int argc, char** argv) {
     double local_a = a + rank * local_n * (b - a) / n;
     double local_b = local_a + local_n * (b - a) / n;
 
+    double start_time = MPI_Wtime(); 
+
     // Perform partial calculation
     double local_result = midpoint_method(local_a, local_b, local_n);
 
@@ -53,7 +55,9 @@ int main(int argc, char** argv) {
     if (rank == 0) {
         std::cout << "Approximation of the integral: " << global_result << std::endl;
     }
-
+    double end_time = MPI_Wtime(); 
+    double elapsed_time = end_time - start_time; // Calculate elapsed time
+    std::cout << "Process " << rank << ": Elapsed time = " << elapsed_time << " seconds" << std::endl;
     MPI_Finalize();
     return 0;
 }
