@@ -48,8 +48,13 @@ int main(int argc, char** argv) {
     std::vector<double> b(n);
     std::vector<double> x(n);
 
-    // Initialize A and b with some values
-    // ...
+    // Initialize A and b with random values
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            A[i][j] = rand() % 100;
+        }
+        b[i] = rand() % 100;
+    }
 
     // Distribute submatrices among processes
     std::vector<std::vector<double>> local_A(local_n, std::vector<double>(n));
