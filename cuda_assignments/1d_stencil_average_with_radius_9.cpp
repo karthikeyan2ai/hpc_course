@@ -15,7 +15,7 @@ __global__ void stencil_average(float *input, float *output, int size)
     temp[lindex] = input[gindex];
     if(threadIdx.x < RADIUS){
         temp[lindex-RADIUS] = input[gindex-RADIUS];
-        temp[lindex+BLOCKSIZE] = input[gindex+BLOCKSIZE];
+        temp[lindex+BLOCK_SIZE] = input[gindex+BLOCK_SIZE];
     }
  
     __syncthreads();
