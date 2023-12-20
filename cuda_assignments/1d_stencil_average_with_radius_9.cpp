@@ -54,11 +54,11 @@ int main()
     cudaFree(device_output);
 
     std::cout << "First 10 inputs :" << std::endl;
-    for(int i=0;i<100;++i){
+    for(int i=0;i<10;++i){
         std::cout << host_input[i] << std::endl;
     }
     std::cout << "First 10 outputs :" << std::endl;
-    for(int i=0;i<100;++i){
+    for(int i=0;i<10;++i){
         std::cout << host_output[i] << std::endl;
     }
 
