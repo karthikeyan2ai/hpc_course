@@ -8,14 +8,14 @@
 
 __global__ void stencil_average(float *input, float *output, int size)
 {
-    __shared__ float temp[BLOCKSIZE + 2*RADIUS];
+    __shared__ float temp[BLOCK_SIZE + 2*RADIUS];
     int gindex = threadIdx.x + blockDim.x * blockIdx.x;
     int lindex = threadIdx.x + RADIUS;
    
-    temp[lindex] = in[gindex];
+    temp[lindex] = input[gindex];
     if(threadIdx.x < RADIUS){
-        temp[lindex-RADIUS] = in[gindex-RADIUS];
-        temp[lindex+BLOCKSIZE] = in[gindex+BLOCKSIZE];
+        temp[lindex-RADIUS] = input[gindex-RADIUS];
+        temp[lindex+BLOCKSIZE] = input[gindex+BLOCKSIZE];
     }
  
     __syncthreads();
@@ -24,7 +24,7 @@ __global__ void stencil_average(float *input, float *output, int size)
         result += temp[lindex+offset];
     }
     if(gindex < size){
-        out[gindex] = result/(RADIUS*2+1);
+        output[gindex] = result/(RADIUS*2+1);
     }
 }
 
