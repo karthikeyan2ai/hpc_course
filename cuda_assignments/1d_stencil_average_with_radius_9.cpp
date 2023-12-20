@@ -53,15 +53,13 @@ int main()
     cudaFree(device_input);
     cudaFree(device_output);
 
-    std::cout << "Sample Output for 100 :" << std::endl;
-
-    for(int i=0;i<100;++i){
-        std::cout << host_output[i] << std::endl;
-    }
-
-    std::cout << "Sample Input for 100 :" << std::endl;
+    std::cout << "First 10 inputs :" << std::endl;
     for(int i=0;i<100;++i){
         std::cout << host_input[i] << std::endl;
+    }
+    std::cout << "First 10 outputs :" << std::endl;
+    for(int i=0;i<100;++i){
+        std::cout << host_output[i] << std::endl;
     }
 
     delete[] host_input;
