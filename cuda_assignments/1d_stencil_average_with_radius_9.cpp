@@ -8,21 +8,23 @@
 
 __global__ void stencil_average(float *input, float *output, int size)
 {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx < size)
-    {
-        float val = 0;
-        int count = 0;
-        for (int i = -RADIUS; i <= RADIUS; i++)
-        {
-            int cur_idx = idx + i;
-            if (cur_idx >= 0 && cur_idx < size)
-            {
-                val += input[cur_idx];
-                count++;
-            }
-        }
-        output[idx] = val / count;
+    __shared__ float temp[BLOCKSIZE + 2*RADIUS];
+    int gindex = threadIdx.x + blockDim.x * blockIdx.x;
+    int lindex = threadIdx.x + RADIUS;
+   
+    temp[lindex] = in[gindex];
+    if(threadIdx.x < RADIUS){
+        temp[lindex-RADIUS] = in[gindex-RADIUS];
+        temp[lindex+BLOCKSIZE] = in[gindex+BLOCKSIZE];
+    }
+ 
+    __syncthreads();
+    float result = 0;
+    for(int offset=-RADIUS;offset<=RADIUS;offset++){
+        result += temp[lindex+offset];
+    }
+    if(gindex < size){
+        out[gindex] = result/(RADIUS*2+1);
     }
 }
 
@@ -50,6 +52,15 @@ int main()
     cudaMemcpy(host_output, device_output, size * sizeof(float), cudaMemcpyDeviceToHost);
     cudaFree(device_input);
     cudaFree(device_output);
+
+    std::cout << "Output :" << std::endl;
+    for(int i=0;i<size;++i){
+        std::cout << host_output[i] << std::endl;
+    }
+
+    std::cout << "Input :" << std::endl;
+    for(int i=0;i<size;++i){
+        std::cout << host_input[i] << std::endl;
 
     delete[] host_input;
     delete[] host_output;
