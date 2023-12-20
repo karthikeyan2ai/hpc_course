@@ -62,6 +62,7 @@ int main()
     std::cout << "Sample Input for 100 :" << std::endl;
     for(int i=0;i<size;++i){
         std::cout << host_input[i] << std::endl;
+    }
 
     delete[] host_input;
     delete[] host_output;
